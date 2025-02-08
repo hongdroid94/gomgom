@@ -4,6 +4,7 @@ import {FC} from "react";
 type Props = {
     data:User
 }
+// 예시 코드 : 공통 컴포넌트 shared/ui 보다는 확장된 컴포넌트
 const UserProfileCard: FC<Props> = ({ data }) => {
     return (
         <div className="p-4 border rounded-lg shadow-md bg-white flex items-center space-x-4">

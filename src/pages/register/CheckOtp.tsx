@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
-import MainLayout from "../../../layout/MainLayout.tsx";
-import {supabase} from "../../../app";
-import ValidationOtp from "../../../features/auth/ui/ValidationOtp.tsx";
+import MainLayout from "../../widgets/layout/MainLayout.tsx";
+import {supabase} from "../../app";
+import ValidationOtp from "../../features/auth/ui/ValidationOtp.tsx";
 
 const CheckOtp = () => {
 

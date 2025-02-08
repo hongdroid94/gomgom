@@ -1,4 +1,4 @@
-import MainLayout from "../../layout/MainLayout.tsx";
+import MainLayout from "../../widgets/layout/MainLayout.tsx";
 import EmailLoginForm from "../../features/auth/ui";
 
 function Register() {

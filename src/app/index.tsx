@@ -1,5 +1,5 @@
 import {createRoot} from "react-dom/client";
-import "../index.css";
+import "./index.css";
 import {createClient} from "@supabase/supabase-js";
 import AppRouter from "./route.tsx";
 import AppProvider from "./provider";

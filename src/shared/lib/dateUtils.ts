@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+// 예시코드 : 추후 필요한 로직만 작성하기
 
 // 플러그인 확장
 dayjs.extend(relativeTime);

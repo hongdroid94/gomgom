@@ -1,13 +1,13 @@
 import {BrowserRouter, Route, Routes} from "react-router";
-import Register from "../pages/register/Register.tsx";
-import CheckOtp from "../pages/register/ui/CheckOtp.tsx";
+import {MainPage,Register,CheckOtp} from "../pages";
 
 const AppRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={"/"} element={<Register/>}/>
-                <Route path={"/check"} element={<CheckOtp/>}/>
+                <Route path={"/"} element={<MainPage/>}/>
+                <Route path={"/register"} element={<Register/>}/>
+                <Route path={"/register/verify-otp"} element={<CheckOtp/>}/>
             </Routes>
         </BrowserRouter>
     )
