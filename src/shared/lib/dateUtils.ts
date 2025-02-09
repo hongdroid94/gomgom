@@ -1,7 +1,7 @@
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 // 예시코드 : 추후 필요한 로직만 작성하기
 
 // 플러그인 확장
@@ -10,7 +10,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 // 날짜를 특정 포맷으로 변환하는 함수
-const defaultFormat = "YYYY-MM-DD HH:mm:ss";
+const defaultFormat = 'YYYY-MM-DD HH:mm:ss';
 const formatDate = (date, format = defaultFormat) => {
     return dayjs(date).format(format);
 };
@@ -46,7 +46,7 @@ const convertToUTC = (date) => {
 };
 
 // 특정 타임존으로 변환하는 함수 (기본값: 아시아/서울)
-const convertToTimezone = (date, tz = "Asia/Seoul") => {
+const convertToTimezone = (date, tz = 'Asia/Seoul') => {
     return dayjs(date).tz(tz).format();
 };
 
@@ -58,5 +58,5 @@ export {
     isAfter,
     getCurrentTime,
     convertToUTC,
-    convertToTimezone
+    convertToTimezone,
 };

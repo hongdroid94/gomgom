@@ -1,4 +1,4 @@
-export type LoginType = "GOOGLE" | "EMAIL";
+export type LoginType = 'GOOGLE' | 'EMAIL';
 
 export default interface User {
     id: string;

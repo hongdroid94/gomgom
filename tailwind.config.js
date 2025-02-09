@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: ["./index.ts.html", "./node_modules/primereact/**/*.{js,ts,jsx,tsx}", "./src/**/*.{js,ts,jsx,tsx,mdx}"],
+    content: [
+        './index.html',
+        './node_modules/primereact/**/*.{js,ts,jsx,tsx}',
+        './src/**/*.{js,ts,jsx,tsx,mdx}',
+    ],
     theme: {
         extend: {
             colors: {
@@ -10,11 +14,10 @@ export default {
                 copink: 'var(--copink)',
                 coyellow: 'var(--coyellow)',
                 cowhite: 'var(--cowhite)',
-                coblue:'var(--coblue)',
-                third:'var(--third)',
+                coblue: 'var(--coblue)',
+                third: 'var(--third)',
             },
         },
     },
     plugins: [],
-}
-
+};

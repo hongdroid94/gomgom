@@ -4,26 +4,24 @@
 @import '../../node_modules/primereact/resources/themes/lara-light-blue/theme.css' layer(primereact);
 
 @layer tailwind-base {
-  @tailwind base;
+    @tailwind base;
 }
 
 @layer tailwind-utilities {
-  @tailwind components;
-  @tailwind utilities;
+    @tailwind components;
+    @tailwind utilities;
 }
 
 /*색상코드 정의 tailwind.config.js 에서도 정의 해야 동작함*/
 :root {
-  --third: #D9D9D9;
-  --cohint: #FFC54E;
-  --cotext: #F8F8F2;
-  --primary: #282A36;
-  --secondary: #44475A;
-  --cogreen: #00FF44;
-  --coblue: #8BE9FD;
-  --copink: #ff79c6;
-  --coyellow: #f1fa8c;
-  --cowhite: #F8F8F2;
+    --third: #d9d9d9;
+    --cohint: #ffc54e;
+    --cotext: #f8f8f2;
+    --primary: #282a36;
+    --secondary: #44475a;
+    --cogreen: #00ff44;
+    --coblue: #8be9fd;
+    --copink: #ff79c6;
+    --coyellow: #f1fa8c;
+    --cowhite: #f8f8f2;
 }
-
-

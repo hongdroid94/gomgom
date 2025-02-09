@@ -1,24 +1,23 @@
-import {useCallback, useState} from "react";
-import { InputOtp } from "primereact/inputotp";
-import {authApi} from "../api";
-import {useAuthStore} from "../../../entities/user/model";
-import {useNavigate} from "react-router";
+import { useCallback, useState } from 'react';
+import { InputOtp } from 'primereact/inputotp';
+import { authApi } from '../api';
+import { useAuthStore } from '../../../entities/user/model';
+import { useNavigate } from 'react-router';
 
 const ValidationOtp = () => {
-    const {emailLogin} = useAuthStore();
-    const [otp, setOtp] = useState("");
+    const { emailLogin } = useAuthStore();
+    const [otp, setOtp] = useState('');
     const navigate = useNavigate();
 
     const onChangeOtp = (e) => {
         setOtp(e.value);
     };
-    const onClickOtpVerify = useCallback(async ()=>{
-        console.log(emailLogin)
-        const user = await authApi.validateEmailOtp(emailLogin,otp)
-        console.log(user.user)
-        navigate("/");
-
-    },[otp,emailLogin]);
+    const onClickOtpVerify = useCallback(async () => {
+        console.log(emailLogin);
+        const user = await authApi.validateEmailOtp(emailLogin, otp);
+        console.log(user.user);
+        navigate('/');
+    }, [otp, emailLogin]);
 
     return (
         <div className="flex items-center justify-center h-screen bg-gray-100">

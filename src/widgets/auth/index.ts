@@ -1,1 +1,1 @@
-export * from "./UserProfileCard.tsx"
+export * from './UserProfileCard.tsx';

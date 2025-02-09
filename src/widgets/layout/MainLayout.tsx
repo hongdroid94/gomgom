@@ -1,23 +1,16 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
+import { GIcon } from '../../shared/ui';
 
 const MainLayout = ({ children }: { children: ReactNode }) => {
     return (
-        <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    width: "100vw",
-                    padding: "10px 20px",
-                    backgroundColor: "#f8f9fa",
-                    borderBottom: "1px solid #ddd",
-                }}
-            >
-                <span style={{ fontSize: "20px", fontWeight: "bold" }}>GomGom</span>
-                <span style={{ fontSize: "24px", cursor: "pointer" }}>👤</span>
+        <div>
+            <div className={'w-full h-screen flex flex-col'}>
+                <nav className={'flex justify-between items-center p-2  '}>
+                    <GIcon />
+                    <i className="pi pi-user" style={{ fontSize: '1.5rem' }}></i>
+                </nav>
+                <div className={'flex-1'}>{children}</div>
             </div>
-            <div style={{ flex: 1 }}>{children}</div>
         </div>
     );
 };

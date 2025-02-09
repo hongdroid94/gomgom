@@ -1,15 +1,15 @@
-import useInput from "../../../shared/hook";
-import {authApi} from "../api";
-import {useCallback, useRef} from "react";
-import GButton from "../../../shared/ui/GButton.tsx";
-import {Toast} from "primereact/toast";
-import {useNavigate} from "react-router";
-import {useAuthStore} from "../../../entities/user/model";
+import useInput from '../../../shared/hook';
+import { authApi } from '../api';
+import { useCallback, useRef } from 'react';
+import GButton from '../../../shared/ui/GButton.tsx';
+import { Toast } from 'primereact/toast';
+import { useNavigate } from 'react-router';
+import { useAuthStore } from '../../../entities/user/model';
 
 const EmailLoginForm = () => {
-    const [email, onChangeEmail] = useInput({initialValue: ""});
-    const {setEmailLogin} = useAuthStore();
-    const toast = useRef<Toast|null>(null);
+    const [email, onChangeEmail] = useInput({ initialValue: '' });
+    const { setEmailLogin } = useAuthStore();
+    const toast = useRef<Toast | null>(null);
     const navigate = useNavigate();
 
     const onClickGoogleLogin = useCallback(async () => {
@@ -18,20 +18,21 @@ const EmailLoginForm = () => {
     }, [email]);
     const onClickEmailLogin = useCallback(async () => {
         try {
-            const user = await authApi.registerEmailWithOtp(email!);
+            if (!email) {
+                return;
+            }
+            const user = await authApi.registerEmailWithOtp(email as string);
             console.log(user);
-            console.log(email)
+            console.log(email);
             setEmailLogin(email!);
-            navigate("/register/verify-otp")
+            navigate('/register/verify-otp');
         } catch (e) {
-            toast.current?.show({severity: 'error', summary: e.toString()})
-
+            toast.current?.show({ severity: 'error', summary: e.toString() });
         }
-    }, [email])
+    }, [email]);
 
     return (
-        <div
-            className="flex flex-col items-left p-8 ">
+        <div className="flex flex-col items-left p-8 ">
             <div className={'text-co'}>ss</div>
             <input
                 type="email"
@@ -52,8 +53,8 @@ const EmailLoginForm = () => {
             >
                 구글 로그인
             </GButton>
-            <Toast ref={toast}/>
+            <Toast ref={toast} />
         </div>
-    )
-}
+    );
+};
 export default EmailLoginForm;
