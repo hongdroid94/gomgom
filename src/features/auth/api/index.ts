@@ -1,7 +1,8 @@
 import { supabase } from '../../../app';
 
+// 인증 관련 API 호출을 담당하는 클래스입니다
 class AuthApi {
-    // 구글 로그인 및 회원가입 : 존재하는 계정이면 바로 홈으로 가고 아닐경우 수파베이스 auth 에 등록
+    // 구글 OAuth 로그인/회원가입
     registerOrSignInWithGoogle = async () => {
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
@@ -11,7 +12,8 @@ class AuthApi {
         }
         return data;
     };
-    // 이메일 회원가입 시도 : 해당 이메일 주소로 otp 전송
+
+    // 이메일 OTP 인증 요청
     registerEmailWithOtp = async (email: string) => {
         const { data, error } = await supabase.auth.signInWithOtp({ email: email });
         if (error) {
@@ -19,7 +21,8 @@ class AuthApi {
         }
         return data;
     };
-    // otp 인증
+
+    // OTP 코드 검증
     validateEmailOtp = async (email: string, otp: string) => {
         const { data, error } = await supabase.auth.verifyOtp({
             email: email,
