@@ -1,2 +1,2 @@
-export { default as GButton } from './GButton.tsx';
-export { default as GIcon } from './GIcon.tsx';
+export { default as GButton } from './GButton';
+export { default as GIcon } from './GIcon';
