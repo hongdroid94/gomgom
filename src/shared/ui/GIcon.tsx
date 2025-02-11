@@ -1,16 +1,6 @@
-import React from 'react';
+import { Image } from 'primereact/image';
 
-interface GIconProps {
-    className?: string;
-}
-
-const GIcon: React.FC<GIconProps> = ({ className }) => {
-    return (
-        <div className={className}>
-            {/* 임시 로고 텍스트 */}
-            <span className="font-bold text-xl">GomGom</span>
-        </div>
-    );
+const GIcon = () => {
+    return <Image src={'/gomgom.png'} />;
 };
-
 export default GIcon;

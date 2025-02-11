@@ -1,16 +1,19 @@
-import MainLayout from '../../widgets/layout/MainLayout.tsx';
 import EmailLoginForm from '../../features/auth/ui';
+import { Fieldset } from 'primereact/fieldset';
+import { UnAuthLayout } from '../../widgets/layout';
 
 function Register() {
     return (
-        <MainLayout>
-            <div className="flex flex-col items-center justify-center h-full bg-gray-100">
-                <div className={'border-2 border-gray-300 rounded-lg shadow-lg bg-white gap-5'}>
-                    <h2 className="text-2xl font-semibold m-4">곰곰에 오신 걸 환영합니다</h2>
+        <UnAuthLayout>
+            <div className="flex flex-col items-center justify-center h-full">
+                <Fieldset className={'p-4'}>
+                    <i className="pi pi-microchip-ai" style={{ fontSize: '2.0rem' }}></i>
+                    <h2 className="text-xl font-semibold mt-2 ">곰곰에 오신 걸 환영합니다.</h2>
+                    <div className={'text-sm mt-2'}>아래에 로그인 또는 가입하세요.</div>
                     <EmailLoginForm />
-                </div>
+                </Fieldset>
             </div>
-        </MainLayout>
+        </UnAuthLayout>
     );
 }
 

@@ -11,14 +11,16 @@ const IdeaCreationCard = () => {
                         <span className="text-gray-400">이미지를 업로드해주세요</span>
                     </div>
                 </div>
-                
+
                 <div className="space-y-2">
                     <input
                         type="text"
                         placeholder="구체화 하고싶은 아이디어 주제를 자유롭게 적어보세요"
                         className="w-full px-6 py-4 border border-gray-200 rounded-lg text-lg focus:outline-none focus:border-gray-400"
                     />
-                    <p className="text-gray-500 text-sm px-2">ex. 친환경 관련 비즈니스, 인공지능 서비스</p>
+                    <p className="text-gray-500 text-sm px-2">
+                        ex. 친환경 관련 비즈니스, 인공지능 서비스
+                    </p>
                 </div>
 
                 <div className="flex flex-col gap-3">
@@ -40,4 +42,4 @@ const IdeaCreationCard = () => {
     );
 };
 
-export default IdeaCreationCard; 
+export default IdeaCreationCard;

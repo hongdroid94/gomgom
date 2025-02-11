@@ -1,13 +1,11 @@
-import { useState, useRef } from 'react';
-import MainLayout from '../../widgets/layout/MainLayout.tsx';
-import { supabase } from '../../app';
 import ValidationOtp from '../../features/auth/ui/ValidationOtp.tsx';
+import { UnAuthLayout } from '../../widgets/layout';
 
 const CheckOtp = () => {
     return (
-        <MainLayout>
+        <UnAuthLayout>
             <ValidationOtp />
-        </MainLayout>
+        </UnAuthLayout>
     );
 };
 

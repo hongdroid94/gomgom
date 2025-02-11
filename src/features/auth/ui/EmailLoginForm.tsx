@@ -5,9 +5,10 @@ import GButton from '../../../shared/ui/GButton.tsx';
 import { Toast } from 'primereact/toast';
 import { useNavigate } from 'react-router';
 import { useAuthStore } from '../../../entities/user/model';
+import { InputEmail } from '../../../widgets/auth';
 
 const EmailLoginForm = () => {
-    const [email, onChangeEmail] = useInput({ initialValue: '' });
+    const [email, onChangeEmail, setEmail] = useInput({ initialValue: '' });
     const { setEmailLogin } = useAuthStore();
     const toast = useRef<Toast | null>(null);
     const navigate = useNavigate();
@@ -15,15 +16,16 @@ const EmailLoginForm = () => {
     const onClickGoogleLogin = useCallback(async () => {
         const user = await authApi.registerOrSignInWithGoogle();
         console.log(user);
-    }, [email]);
+    }, []);
+
     const onClickEmailLogin = useCallback(async () => {
         try {
-            if (!email) {
+            if (email === '' || !email) {
+                toast.current?.show({ summary: '이메일을 입력해주세요', severity: 'error' });
                 return;
             }
             const user = await authApi.registerEmailWithOtp(email as string);
             console.log(user);
-            console.log(email);
             setEmailLogin(email!);
             navigate('/register/verify-otp');
         } catch (e) {
@@ -32,24 +34,14 @@ const EmailLoginForm = () => {
     }, [email]);
 
     return (
-        <div className="flex flex-col items-left p-8 ">
-            <div className={'text-co'}>ss</div>
-            <input
-                type="email"
-                placeholder="이메일을 입력하세요"
-                value={email}
-                onChange={onChangeEmail}
-                className="px-4 py-2 w-72 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <GButton
-                onClick={onClickEmailLogin}
-                className="px-4 py-2 w-80 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition my-2"
-            >
+        <div className="flex flex-col items-left mt-4 w-full">
+            <InputEmail value={email} onChange={onChangeEmail} onClear={() => setEmail('')} />
+            <GButton onClick={onClickEmailLogin} className={'bg-white text-black px-4 mt-2'}>
                 이메일로 계속하기
             </GButton>
             <GButton
                 onClick={onClickGoogleLogin}
-                className="px-4 py-2 w-80 bg-red-500 text-white rounded-md hover:bg-red-600 transition my-2"
+                className={'bg-black text-center rounded-none px-4 mt-2'}
             >
                 구글 로그인
             </GButton>
