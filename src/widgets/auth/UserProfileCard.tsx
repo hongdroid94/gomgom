@@ -1,9 +1,9 @@
-import User from "../../entities/user";
-import {FC} from "react";
+import User from '../../entities/user';
+import { FC } from 'react';
 
 type Props = {
-    data:User
-}
+    data: User;
+};
 // 예시 코드 : 공통 컴포넌트 shared/ui 보다는 확장된 컴포넌트
 const UserProfileCard: FC<Props> = ({ data }) => {
     return (
@@ -18,10 +18,12 @@ const UserProfileCard: FC<Props> = ({ data }) => {
             <div>
                 <h2 className="text-xl font-semibold">{data.nickname}</h2>
                 <p className="text-gray-500">{data.email}</p>
-                <span className="text-sm text-gray-400">가입일: {data.createdAt.toDateString()}</span>
+                <span className="text-sm text-gray-400">
+                    가입일: {data.createdAt.toDateString()}
+                </span>
             </div>
         </div>
     );
 };
 
-export default UserProfileCard
+export default UserProfileCard;

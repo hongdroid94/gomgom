@@ -1,1 +1,1 @@
-export {default} from "./EmailLoginForm.tsx";
+export { default } from './EmailLoginForm.tsx';

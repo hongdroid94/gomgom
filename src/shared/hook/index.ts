@@ -1,1 +1,1 @@
-export {default} from "./useInput.ts"
+export { default } from './useInput.ts';
