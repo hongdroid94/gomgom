@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { CheckOtp, Register, RegisterProfile } from '../pages/register';
 import MainPage from '../pages/main/MainPage.tsx';
-import { Navigate } from 'react-router-dom';
 import IdeaPage from '../pages/idea/IdeaPage.tsx';
 import ExplorePage from '../pages/explore/ExplorePage.tsx';
 

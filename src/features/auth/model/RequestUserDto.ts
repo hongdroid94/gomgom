@@ -1,7 +1,5 @@
-export enum LoginType {
-    EMAIL = 'EMAIL',
-    GOOGLE = 'GOOGLE',
-}
+import { LoginType } from '../../../entities/user';
+
 export type RequestUserDto = {
     email: string;
     nickname: string;

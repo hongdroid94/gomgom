@@ -1,5 +1,6 @@
 import { supabase } from '../../../app';
 import { RequestUserDto } from '../model';
+import User, { LoginType } from '../../../entities/user';
 
 class AuthApi {
     // 구글 로그인 및 회원가입 : 존재하는 계정이면 바로 홈으로 가고 아닐경우 수파베이스 auth 에 등록
@@ -70,6 +71,19 @@ class AuthApi {
             throw new Error('이미지 업로드 실패 ');
         }
         return data.fullPath!;
+    };
+
+    // 유저 정보 조회
+    findUserByEmailAndLoginType = async (email: string, loginType: LoginType) => {
+        const {
+            data,
+            error,
+        } = await supabase.from('users').select('*').eq('email', email).eq('login_type', loginType);
+        if (error) throw error;
+        if (!data || data?.length===0) {
+            throw new Error('유저 정보를 가져오는데 실패했습니다.');
+        }
+        return data[0] as User;
     };
 }
 
