@@ -44,6 +44,7 @@ class AuthApi {
         return data?.length > 0;
     };
 
+    // 유저 데이터 데이터베이스에 삽입 : 회원가입
     insertUserData = async (requestUserDto: RequestUserDto) => {
         const { data, error } = await supabase.from('users').insert(requestUserDto);
         if (error) {
@@ -53,6 +54,8 @@ class AuthApi {
         console.log(data);
         return data;
     };
+
+    // 이미지 업로드
     uploadImageFileAtSupabase = async (uid: string, file: File): Promise<string> => {
         const fileExt = file.name.split('.').pop();
         const fileName = `${Date.now()}_${uid}.${fileExt}`; // 고유한 파일명 생성
@@ -66,7 +69,7 @@ class AuthApi {
         if (!data?.fullPath) {
             throw new Error('이미지 업로드 실패 ');
         }
-        return data?.fullPath!;
+        return data.fullPath!;
     };
 }
 
