@@ -18,7 +18,7 @@ async function fetchUserRegistered() {
     const isRegistered = await authApi.checkRegisteredEmail(data.user.email);
     console.log("가입 여부 :",isRegistered);
     if (!isRegistered) {
-        throw new Error('가입되지 않은 회원입니다. 가입후 이용해 주세요');
+        return false;
     }
     return await authApi.findUserByEmailAndLoginType(data.user.email, data.user.app_metadata.provider === 'email' ? LoginType.EMAIL : LoginType.GOOGLE);
 

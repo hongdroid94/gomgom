@@ -1,16 +1,16 @@
 import useInput from '../../../shared/hook';
 import { authApi } from '../api';
-import { useCallback, useRef } from 'react';
+import { useCallback } from 'react';
 import GButton from '../../../shared/ui/GButton.tsx';
-import { Toast } from 'primereact/toast';
 import { useNavigate } from 'react-router';
 import { useAuthStore } from '../../../entities/user/model';
 import { InputEmail } from '../../../widgets/auth';
+import { useToast } from '../../../shared/hook/useToast.ts';
 
 const EmailLoginForm = () => {
     const [email, onChangeEmail, setEmail] = useInput({ initialValue: '' });
     const { setEmailLogin } = useAuthStore();
-    const toast = useRef<Toast | null>(null);
+    const { toastRef } = useToast();
     const navigate = useNavigate();
 
     const onClickGoogleLogin = useCallback(async () => {
@@ -21,7 +21,7 @@ const EmailLoginForm = () => {
     const onClickEmailLogin = useCallback(async () => {
         try {
             if (email === '' || !email) {
-                toast.current?.show({ summary: '이메일을 입력해주세요', severity: 'error' });
+                toastRef?.current?.show({ summary: '이메일을 입력해주세요', severity: 'error' });
                 return;
             }
             const user = await authApi.registerEmailWithOtp(email as string);
@@ -29,9 +29,9 @@ const EmailLoginForm = () => {
             setEmailLogin(email!);
             navigate('/register/verify-otp');
         } catch (e) {
-            toast.current?.show({ severity: 'error', summary: e.toString() });
+            toastRef?.current?.show({ severity: 'error', summary: e.toString() });
         }
-    }, [email]);
+    }, [email, toastRef]);
 
     return (
         <div className="flex flex-col items-left mt-4 w-full">
@@ -45,7 +45,6 @@ const EmailLoginForm = () => {
             >
                 구글 로그인
             </GButton>
-            <Toast ref={toast} />
         </div>
     );
 };

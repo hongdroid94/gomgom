@@ -85,6 +85,10 @@ class AuthApi {
         }
         return data[0] as User;
     };
+    logout = async()=>{
+        const {error}  =await supabase.auth.signOut();
+        if(error) throw error;
+    }
 }
 
 export const authApi = new AuthApi();

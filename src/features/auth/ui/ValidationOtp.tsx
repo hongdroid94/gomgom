@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { InputOtp } from 'primereact/inputotp';
 import { authApi } from '../api';
 import { useAuthStore } from '../../../entities/user/model';
@@ -9,11 +9,37 @@ import { GBackButton, GButton } from '../../../shared/ui';
 const ValidationOtp = () => {
     const { emailLogin } = useAuthStore();
     const [otp, setOtp] = useState('');
+    const [timer, setTimer] = useState(60);
+    const [canResend, setCanResend] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        // OTP 6자리 입력 시 자동 인증
+        if (otp.length === 6) {
+            onClickOtpVerify().then();
+        }
+    }, [otp]);
+
+    useEffect(() => {
+        // 타이머 시작
+        const countdown = setInterval(() => {
+            setTimer((prev) => {
+                if (prev === 1) {
+                    clearInterval(countdown);
+                    setCanResend(true);
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+
+        return () => clearInterval(countdown);
+    }, []);
 
     const onChangeOtp = (e) => {
         setOtp(e.value);
     };
+
     const onClickOtpVerify = useCallback(async () => {
         try {
             console.log(emailLogin);
@@ -33,16 +59,31 @@ const ValidationOtp = () => {
         }
     }, [otp, emailLogin]);
 
+    const onResendOtp = async () => {
+        try {
+            await authApi.registerEmailWithOtp(emailLogin);
+            setTimer(60);
+            setCanResend(false);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
     return (
         <div className="flex items-center justify-center h-full">
-            <Fieldset>
-                <GBackButton className={'my-2'} />
-                <h2 className="text-lg font-semibold mb-2">코드 입력</h2>
-                <InputOtp length={6} value={otp} onChange={onChangeOtp} />
-                <div className={'flex justify-end'}>
-                    <GButton onClick={onClickOtpVerify} className={'mt-2 bg-black text-white p-2'}>
-                        인증하기
-                    </GButton>
+            <Fieldset className={'p-2 w-full max-w-[40%] flex flex-col items-center justify-center'}>
+                <GBackButton  />
+                <h2 className="text-lg font-semibold mb-2 mt-2">코드 입력</h2>
+                <div className={'my-2'}>{emailLogin}로 보낸 6자리 코드를 입력하세요</div>
+                <InputOtp className={'text-center'} length={6} value={otp} onChange={onChangeOtp} />
+                <div className="flex justify-between mt-2">
+                    {canResend ? (
+                        <button onClick={onResendOtp} className="text-blue-500">
+                            재전송하기
+                        </button>
+                    ) : (
+                        <span className="text-gray-500">{timer}초 후 재전송</span>
+                    )}
                 </div>
             </Fieldset>
         </div>
