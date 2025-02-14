@@ -75,20 +75,21 @@ class AuthApi {
 
     // 유저 정보 조회
     findUserByEmailAndLoginType = async (email: string, loginType: LoginType) => {
-        const {
-            data,
-            error,
-        } = await supabase.from('users').select('*').eq('email', email).eq('login_type', loginType);
+        const { data, error } = await supabase
+            .from('users')
+            .select('*')
+            .eq('email', email)
+            .eq('login_type', loginType);
         if (error) throw error;
-        if (!data || data?.length===0) {
+        if (!data || data?.length === 0) {
             throw new Error('유저 정보를 가져오는데 실패했습니다.');
         }
         return data[0] as User;
     };
-    logout = async()=>{
-        const {error}  =await supabase.auth.signOut();
-        if(error) throw error;
-    }
+    logout = async () => {
+        const { error } = await supabase.auth.signOut();
+        if (error) throw error;
+    };
 }
 
 export const authApi = new AuthApi();

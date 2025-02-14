@@ -22,6 +22,5 @@ const RegisterSuccess = () => {
             </Fieldset>
         </GuestLayout>
     );
-
 };
 export default RegisterSuccess;

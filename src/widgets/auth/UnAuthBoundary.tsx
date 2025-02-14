@@ -7,7 +7,7 @@ import { Navigate } from 'react-router-dom';
 
 type Props = {
     children: React.ReactNode;
-}
+};
 
 const UnAuthBoundary: FC<Props> = ({ children }) => {
     const { isLoading, isError, data } = useQueryAuthUser();
@@ -15,15 +15,11 @@ const UnAuthBoundary: FC<Props> = ({ children }) => {
         return <GLoading />;
     }
     if (isError) {
-        return <>
-            {children}
-        </>;
+        return <>{children}</>;
     }
     if (!data) {
-        return <>
-            {children}
-        </>;
+        return <>{children}</>;
     }
-    return <Navigate replace to={"/"}/>
+    return <Navigate replace to={'/'} />;
 };
 export default UnAuthBoundary;

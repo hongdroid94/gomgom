@@ -13,9 +13,9 @@ const AppRouter = () => {
                 <Route path={'/register'} element={<Register />} />
                 <Route path={'/register/profile'} element={<RegisterProfile />} />
                 <Route path={'/register/verify-otp'} element={<CheckOtp />} />
-                <Route path={"/register/success"} element={<RegisterSuccess/>}/>
-                <Route path={'/idea'} element={<IdeaPage/>} />
-                <Route path={"/explore"} element={<ExplorePage/>}/>
+                <Route path={'/register/success'} element={<RegisterSuccess />} />
+                <Route path={'/idea'} element={<IdeaPage />} />
+                <Route path={'/explore'} element={<ExplorePage />} />
             </Routes>
         </BrowserRouter>
     );

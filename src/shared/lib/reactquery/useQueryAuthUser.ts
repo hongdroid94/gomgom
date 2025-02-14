@@ -4,7 +4,7 @@ import { supabase } from '../../../app';
 import { authApi } from '../../../features/auth';
 import User, { LoginType } from '../../../entities/user';
 
-async function fetchUserRegistered():Promise<boolean|User> {
+async function fetchUserRegistered(): Promise<boolean | User> {
     const { data, error } = await supabase.auth.getUser();
     if (error) {
         // 토큰 만료
@@ -16,19 +16,21 @@ async function fetchUserRegistered():Promise<boolean|User> {
         throw error;
     }
     const isRegistered = await authApi.checkRegisteredEmail(data.user.email);
-    console.log("가입 여부 :",isRegistered);
+    console.log('가입 여부 :', isRegistered);
     if (!isRegistered) {
         return false;
     }
-    return await authApi.findUserByEmailAndLoginType(data.user.email, data.user.app_metadata.provider === 'email' ? LoginType.EMAIL : LoginType.GOOGLE);
-
+    return await authApi.findUserByEmailAndLoginType(
+        data.user.email,
+        data.user.app_metadata.provider === 'email' ? LoginType.EMAIL : LoginType.GOOGLE
+    );
 }
 
 // 웹캐시(액세스,리프레시 토큰)기반으로 OAuth 혹은 이메일 로그인 시도후 로그인 성공시 해당 이메일이 가입된 유저인지 체크
 export const useQueryAuthUser = () => {
     return useQuery({
         queryKey: queryKeys.getAuthUser,
-        queryFn: ()=>fetchUserRegistered(),
-        retry:false,
+        queryFn: () => fetchUserRegistered(),
+        retry: false,
     });
 };

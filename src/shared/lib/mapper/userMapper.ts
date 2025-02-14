@@ -1,5 +1,5 @@
 import { User } from '@supabase/supabase-js';
-import {  RequestUserDto } from '../../../features/auth/model';
+import { RequestUserDto } from '../../../features/auth/model';
 import { LoginType } from '../../../entities/user';
 
 export const mapperUserToRequestUserDto = (data: User): RequestUserDto => {

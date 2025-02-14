@@ -1,5 +1,5 @@
-import { InputText } from "primereact/inputtext";
-import React, { forwardRef } from "react";
+import { InputText } from 'primereact/inputtext';
+import React, { forwardRef } from 'react';
 
 type InputEmailProps = {
     value: string | undefined;

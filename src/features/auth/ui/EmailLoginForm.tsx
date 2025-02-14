@@ -28,8 +28,11 @@ const EmailLoginForm = () => {
                 inputRef?.current?.focus();
                 return;
             }
-            if(!emailRegex.test(email)){
-                toastRef?.current?.show({ summary: '유효한 이메일을 입력해주세요', severity: 'error' });
+            if (!emailRegex.test(email)) {
+                toastRef?.current?.show({
+                    summary: '유효한 이메일을 입력해주세요',
+                    severity: 'error',
+                });
                 inputRef.current.focus();
                 return;
             }
@@ -44,7 +47,12 @@ const EmailLoginForm = () => {
 
     return (
         <div className="flex flex-col items-left mt-4 w-full">
-            <InputEmail ref={inputRef} value={email} onChange={onChangeEmail} onClear={() => setEmail('')} />
+            <InputEmail
+                ref={inputRef}
+                value={email}
+                onChange={onChangeEmail}
+                onClear={() => setEmail('')}
+            />
             <GButton onClick={onClickEmailLogin} className={'bg-white text-black px-4 mt-2'}>
                 이메일로 계속하기
             </GButton>

@@ -72,10 +72,16 @@ const ValidationOtp = () => {
     return (
         <div className="flex items-center justify-center h-full">
             <Fieldset className={'p-4 w-full max-w-[80%] sm:max-w-[60%] lg:max-w-[50%]'}>
-                <GBackButton  />
+                <GBackButton />
                 <h2 className="text-lg font-semibold mb-2 mt-2">코드 입력</h2>
                 <div className={'my-2'}>{emailLogin}로 보낸 6자리 코드를 입력하세요</div>
-                <InputOtp type={'number'} className={'text-center'} length={6} value={otp} onChange={onChangeOtp} />
+                <InputOtp
+                    type={'number'}
+                    className={'text-center'}
+                    length={6}
+                    value={otp}
+                    onChange={onChangeOtp}
+                />
                 <div className="flex justify-between mt-2">
                     {canResend ? (
                         <button onClick={onResendOtp} className="text-blue-500">

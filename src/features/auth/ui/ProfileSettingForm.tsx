@@ -20,7 +20,7 @@ const ProfileSettingForm: FC<Props> = ({ user }) => {
     const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
     const [file, setFile] = useState<File | null>(null);
     const navigate = useNavigate();
-    const {toastRef} = useToast();
+    const { toastRef } = useToast();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -37,8 +37,8 @@ const ProfileSettingForm: FC<Props> = ({ user }) => {
     };
     const onClickStart = useCallback(async () => {
         try {
-            if(name.length<1){
-                toastError(toastRef,"닉네임은 1글자 이상으로 설정해주세요")
+            if (name.length < 1) {
+                toastError(toastRef, '닉네임은 1글자 이상으로 설정해주세요');
                 return;
             }
             let requestUserDto = mapperUserToRequestUserDto(user);
@@ -71,8 +71,8 @@ const ProfileSettingForm: FC<Props> = ({ user }) => {
             <div className="flex my-2">
                 <div className="relative inline-block mr-1">
                     <label htmlFor="avatar-upload" className="cursor-pointer">
-                        <Avatar shape="circle" className="w-16 h-16" image={avatarPreview || ''} >
-                            {!avatarPreview &&<i className={'pi pi-image'}/>}
+                        <Avatar shape="circle" className="w-16 h-16" image={avatarPreview || ''}>
+                            {!avatarPreview && <i className={'pi pi-image'} />}
                         </Avatar>
                     </label>
                     <input

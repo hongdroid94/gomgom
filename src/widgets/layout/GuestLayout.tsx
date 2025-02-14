@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 
 type Props = {
     children: React.ReactNode;
-}
+};
 
 const GuestLayout: FC<Props> = ({ children }) => {
     return (
@@ -14,9 +14,7 @@ const GuestLayout: FC<Props> = ({ children }) => {
                 </Link>
             </nav>
             <div className={'flex-1'}>
-                <div className="flex flex-col items-center justify-center h-full">
-                    {children}
-                </div>
+                <div className="flex flex-col items-center justify-center h-full">{children}</div>
             </div>
         </div>
     );
