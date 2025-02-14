@@ -7,6 +7,8 @@ import { User } from '@supabase/supabase-js';
 import { authApi } from '../api';
 import { mapperUserToRequestUserDto } from '../../../shared/lib/mapper';
 import { useNavigate } from 'react-router';
+import { useToast } from '../../../shared/hook/useToast.ts';
+import { toastError } from '../../../shared/lib/toastUtils.ts';
 
 type Props = {
     user: User;
@@ -18,6 +20,7 @@ const ProfileSettingForm: FC<Props> = ({ user }) => {
     const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
     const [file, setFile] = useState<File | null>(null);
     const navigate = useNavigate();
+    const {toastRef} = useToast();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -34,6 +37,10 @@ const ProfileSettingForm: FC<Props> = ({ user }) => {
     };
     const onClickStart = useCallback(async () => {
         try {
+            if(name.length<1){
+                toastError(toastRef,"닉네임은 1글자 이상으로 설정해주세요")
+                return;
+            }
             let requestUserDto = mapperUserToRequestUserDto(user);
 
             if (file) {
@@ -61,10 +68,12 @@ const ProfileSettingForm: FC<Props> = ({ user }) => {
 
     return (
         <div>
-            <div className="flex mt-2">
-                <div className="relative inline-block">
+            <div className="flex my-2">
+                <div className="relative inline-block mr-1">
                     <label htmlFor="avatar-upload" className="cursor-pointer">
-                        <Avatar shape="circle" className="w-16 h-16" image={avatarPreview || ''} />
+                        <Avatar shape="circle" className="w-16 h-16" image={avatarPreview || ''} >
+                            {!avatarPreview &&<i className={'pi pi-image'}/>}
+                        </Avatar>
                     </label>
                     <input
                         id="avatar-upload"
@@ -79,8 +88,8 @@ const ProfileSettingForm: FC<Props> = ({ user }) => {
                         onClick={() => document.getElementById('avatar-upload')?.click()}
                     />
                 </div>
-                <div className="ml-4 w-full">
-                    <div>이름</div>
+                <div className="ml-6 w-full">
+                    <div className={`text-${isValid ? 'green-500' : 'red-500'}`}>이름</div>
                     <InputText
                         placeholder="귀하의 이름"
                         className={`w-full mt-1 ${isValid ? 'border-green-500' : 'border-red-500'}`}
