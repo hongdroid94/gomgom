@@ -1,4 +1,7 @@
-export type LoginType = 'GOOGLE' | 'EMAIL';
+export enum LoginType {
+    GOOGLE = 'GOOGLE',
+    EMAIL = 'EMAIL',
+}
 
 export default interface User {
     id: string;

@@ -1,5 +1,6 @@
 import { supabase } from '../../../app';
 import { RequestUserDto } from '../model';
+import User, { LoginType } from '../../../entities/user';
 
 class AuthApi {
     // 구글 로그인 및 회원가입 : 존재하는 계정이면 바로 홈으로 가고 아닐경우 수파베이스 auth 에 등록
@@ -44,6 +45,7 @@ class AuthApi {
         return data?.length > 0;
     };
 
+    // 유저 데이터 데이터베이스에 삽입 : 회원가입
     insertUserData = async (requestUserDto: RequestUserDto) => {
         const { data, error } = await supabase.from('users').insert(requestUserDto);
         if (error) {
@@ -53,6 +55,8 @@ class AuthApi {
         console.log(data);
         return data;
     };
+
+    // 이미지 업로드
     uploadImageFileAtSupabase = async (uid: string, file: File): Promise<string> => {
         const fileExt = file.name.split('.').pop();
         const fileName = `${Date.now()}_${uid}.${fileExt}`; // 고유한 파일명 생성
@@ -66,7 +70,25 @@ class AuthApi {
         if (!data?.fullPath) {
             throw new Error('이미지 업로드 실패 ');
         }
-        return data?.fullPath!;
+        return data.fullPath!;
+    };
+
+    // 유저 정보 조회
+    findUserByEmailAndLoginType = async (email: string, loginType: LoginType) => {
+        const { data, error } = await supabase
+            .from('users')
+            .select('*')
+            .eq('email', email)
+            .eq('login_type', loginType);
+        if (error) throw error;
+        if (!data || data?.length === 0) {
+            throw new Error('유저 정보를 가져오는데 실패했습니다.');
+        }
+        return data[0] as User;
+    };
+    logout = async () => {
+        const { error } = await supabase.auth.signOut();
+        if (error) throw error;
     };
 }
 
