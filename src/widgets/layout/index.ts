@@ -1,2 +1,2 @@
 export { default as MainLayout } from './MainLayout.tsx';
-export { default as UnAuthLayout } from './UnAuthLayout.tsx';
+export { default as GuestLayout } from './GuestLayout.tsx';
