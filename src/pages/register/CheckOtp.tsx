@@ -1,11 +1,14 @@
 import ValidationOtp from '../../features/auth/ui/ValidationOtp.tsx';
-import { UnAuthLayout } from '../../widgets/layout';
+import { GuestLayout } from '../../widgets/layout';
+import UnAuthBoundary from '../../widgets/auth/UnAuthBoundary.tsx';
 
 const CheckOtp = () => {
     return (
-        <UnAuthLayout>
-            <ValidationOtp />
-        </UnAuthLayout>
+        <GuestLayout>
+            <UnAuthBoundary>
+                <ValidationOtp />
+            </UnAuthBoundary>
+        </GuestLayout>
     );
 };
 

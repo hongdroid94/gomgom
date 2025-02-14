@@ -1,4 +1,4 @@
-import { UnAuthLayout } from '../../widgets/layout';
+import { GuestLayout } from '../../widgets/layout';
 import { Fieldset } from 'primereact/fieldset';
 import { GIcon } from '../../shared/ui';
 import { useQueryAuthUser } from '../../shared/lib/reactquery';
@@ -12,7 +12,7 @@ const RegisterSuccess = () => {
         return <>nodata</>;
     }
     return (
-        <UnAuthLayout>
+        <GuestLayout>
             <Fieldset className={'p-4 w-full max-w-[80%] sm:max-w-[60%] lg:max-w-[50%]'}>
                 <div className={'flex flex-col items-center justify-center'}>
                     <GIcon />
@@ -20,7 +20,7 @@ const RegisterSuccess = () => {
                     <div className={'text-lg'}>{data.nickname}</div>
                 </div>
             </Fieldset>
-        </UnAuthLayout>
+        </GuestLayout>
     );
 
 };
