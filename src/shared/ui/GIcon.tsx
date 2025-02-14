@@ -1,6 +1,6 @@
 import { Image } from 'primereact/image';
 
 const GIcon = () => {
-    return <Image src={'/gomgom.png'} />;
+    return <Image src={'/images/gomgom_logo.svg'} />;
 };
 export default GIcon;
