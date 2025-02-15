@@ -1,4 +1,3 @@
-import { GIcon } from '../../shared/ui';
 import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
@@ -30,14 +29,14 @@ const Header = () => {
                     </div>
 
                     <div className="flex items-center space-x-4">
+                        <button className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                            <img src="/icons/prime_user.svg" alt="user" className="w-5 h-5" />
+                        </button>
+                        
                         <div className="flex items-center gap-2">
                             <img src="/icons/tape_icon.svg" alt="tape" className="w-5 h-5" />
-                            <span className="text-sm font-medium">128</span>
+                            <span className="text-sm font-medium">128개</span>
                         </div>
-
-                        <button className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-                            <i className="pi pi-user text-gray-600"></i>
-                        </button>
                     </div>
                 </nav>
             </div>
