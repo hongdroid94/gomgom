@@ -10,7 +10,6 @@ const MainPage = () => {
     return (
         <MainLayout>
             <AuthBoundary>
-                <div className={'text-4xl m-4 text-cogreen'}>메인페이지</div>
                 {/*임시 로그아웃 버튼*/}
                 <GButton
                     onClick={async () => {
