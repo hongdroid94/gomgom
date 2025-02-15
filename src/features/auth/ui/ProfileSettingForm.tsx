@@ -58,7 +58,7 @@ const ProfileSettingForm: FC<Props> = ({ user }) => {
             };
             console.log(requestUserDto);
             await authApi.insertUserData(requestUserDto);
-            navigate('/');
+            navigate('/register/success');
         } catch (e) {
             console.log('가입 에러러');
             console.error(e);
