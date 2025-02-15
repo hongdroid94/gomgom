@@ -2,9 +2,9 @@ import { GButton } from '../../../shared/ui';
 
 const IdeaCreationCard = () => {
     return (
-        <div className="max-w-2xl mx-auto">
+        <div className="w-full">
             <h2 className="text-2xl font-semibold text-center mb-12">아이디어를 구체화해볼까요?</h2>
-            <div className="space-y-8">
+            <div className="max-w-2xl mx-auto space-y-8">
                 {/* 이미지 플레이스홀더 */}
                 <div className="aspect-[16/9] bg-white rounded-lg overflow-hidden border border-gray-200">
                     <div className="w-full h-full flex items-center justify-center">
