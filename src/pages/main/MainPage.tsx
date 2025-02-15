@@ -1,26 +1,21 @@
 import MainLayout from '../../widgets/layout/MainLayout.tsx';
-import AuthBoundary from '../../widgets/auth/AuthBoundary.tsx';
-import { GButton } from '../../shared/ui';
-import { authApi } from '../../features/auth';
 import { IdeaCreationCard } from '../../features/ideas/ui';
-import { useNavigate } from 'react-router';
 
 const MainPage = () => {
-    const navigate = useNavigate();
     return (
         <MainLayout>
-            <AuthBoundary>
-                {/*임시 로그아웃 버튼*/}
-                <GButton
-                    onClick={async () => {
-                        await authApi.logout();
-                        navigate('/register');
-                    }}
-                    className={'bg-copink'}
-                >
-                    로그아웃
-                </GButton>
-            </AuthBoundary>
+            <div className="w-full border-b border-gray-200">
+                <div className="max-w-7xl mx-auto">
+                    <div className="w-full h-[240px] bg-gray-100 relative overflow-hidden">
+                        <img 
+                            src="/images/placeholder.png" 
+                            alt="메인 배너" 
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
+                </div>
+            </div>
+
             <div className="pt-4 space-y-16">
                 {/* 아이디어 생성 카드 */}
                 <IdeaCreationCard />
@@ -65,4 +60,5 @@ const MainPage = () => {
         </MainLayout>
     );
 };
+
 export default MainPage;
