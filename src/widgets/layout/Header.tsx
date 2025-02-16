@@ -32,8 +32,10 @@ const Header = () => {
                     <div className="flex gap-8">
                         <NavLink
                             to="/idea"
-                            className={({ isActive }) =>
-                                `text-lg font-medium ${isActive ? 'text-black' : 'text-gray-500'} flex items-center gap-2`
+                            className={({ isActive, pathname }) =>
+                                `text-lg font-medium ${
+                                    pathname === '/idea' ? 'text-black' : 'text-gray-500'
+                                } flex items-center gap-2`
                             }
                         >
                             <img src="/icons/sample_icon.svg" alt="idea" className="w-5 h-5" />

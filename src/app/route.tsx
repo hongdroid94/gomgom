@@ -4,6 +4,7 @@ import MainPage from '../pages/main/MainPage.tsx';
 import IdeaPage from '../pages/idea/IdeaPage.tsx';
 import ExplorePage from '../pages/explore/ExplorePage.tsx';
 import RegisterSuccess from '../pages/register/RegisterSuccess.tsx';
+import CreateIdeaPage from '../pages/idea/CreateIdeaPage';
 
 const AppRouter = () => {
     return (
@@ -16,6 +17,7 @@ const AppRouter = () => {
                 <Route path={'/register/success'} element={<RegisterSuccess />} />
                 <Route path={'/idea'} element={<IdeaPage />} />
                 <Route path={'/explore'} element={<ExplorePage />} />
+                <Route path={'/idea/create'} element={<CreateIdeaPage />} />
             </Routes>
         </BrowserRouter>
     );
