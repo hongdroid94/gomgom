@@ -7,6 +7,8 @@ import { useAuthStore } from '../../../entities/user/model';
 import { InputEmail } from '../../../widgets/auth';
 import { useToast } from '../../../shared/hook/useToast.ts';
 import { emailRegex } from '../../../shared/lib';
+import { LoginType } from '../../../entities/user';
+import { toastError } from '../../../shared/lib/toastUtils.ts';
 
 const EmailLoginForm = () => {
     const [email, onChangeEmail, setEmail] = useInput({ initialValue: '' });
@@ -34,6 +36,10 @@ const EmailLoginForm = () => {
                     severity: 'error',
                 });
                 inputRef.current.focus();
+                return;
+            }
+            if(!await authApi.validationEmail(email,LoginType.EMAIL)){
+                toastError(toastRef,"이미 해당 아이디로 가입된 이메일이 존재합니다.")
                 return;
             }
             await authApi.registerEmailWithOtp(email as string);
