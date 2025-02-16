@@ -16,6 +16,11 @@ const Header = () => {
         }
     };
 
+    const handleLogin = () => {
+        navigate('/register');
+        setIsDropdownOpen(false);
+    };
+
     return (
         <header className="w-full border-b border-gray-200">
             <div className="max-w-7xl mx-auto px-4">
@@ -48,20 +53,29 @@ const Header = () => {
                     <div className="flex items-center space-x-4">
                         <div className="relative">
                             <button 
-                                className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center"
+                                className="w-5 h-5 flex items-center justify-center"
                                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                             >
-                                <img src="/icons/prime_user.svg" alt="user" className="w-5 h-5" />
+                                <img src="/icons/prime_user.svg" alt="user" className="w-full h-full" />
                             </button>
 
-                            {isDropdownOpen && sessionData?.data.user && (
+                            {isDropdownOpen && (
                                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2">
-                                    <button
-                                        onClick={handleLogout}
-                                        className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
-                                    >
-                                        로그아웃
-                                    </button>
+                                    {sessionData?.data.user ? (
+                                        <button
+                                            onClick={handleLogout}
+                                            className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+                                        >
+                                            로그아웃
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={handleLogin}
+                                            className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+                                        >
+                                            로그인
+                                        </button>
+                                    )}
                                 </div>
                             )}
                         </div>
