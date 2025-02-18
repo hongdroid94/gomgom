@@ -3,7 +3,8 @@ export enum LoginType {
     EMAIL = 'EMAIL',
 }
 
-export default interface User {
+
+export default interface UserDto {
     id: string;
     nickname: string;
     email: string;
@@ -11,4 +12,13 @@ export default interface User {
     profileImageUrl?: string;
     createdAt: Date;
     deletedAt?: Date | null;
+}
+export type User = {
+    id: string;
+    nickname: string;
+    email: string;
+    login_type: LoginType;
+    profile_image_url?: string;
+    created_at: Date;
+    deleted_at?: Date | null;
 }

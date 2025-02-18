@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { GlobalRefContext } from '../../app/provider/GlobalToastProvider.tsx';
+import { GlobalRefContext } from '../../app/provider/GlobalRefContext.ts';
 
 export const useToast = () => {
     const context = useContext(GlobalRefContext);

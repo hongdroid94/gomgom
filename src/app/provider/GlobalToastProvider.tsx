@@ -1,9 +1,6 @@
-import React, { createContext, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Toast } from 'primereact/toast';
-
-export const GlobalRefContext = createContext<{ toastRef: React.RefObject<Toast> | null }>({
-    toastRef: null,
-});
+import { GlobalRefContext } from './GlobalRefContext.ts';
 
 export const GlobalToastProvider = ({ children }: { children: React.ReactNode }) => {
     const toastRef = useRef<Toast | null>(null);
@@ -11,7 +8,7 @@ export const GlobalToastProvider = ({ children }: { children: React.ReactNode })
     return (
         <GlobalRefContext.Provider value={{ toastRef }}>
             {children}
-            <Toast ref={toastRef} group={'global'} />
+            <Toast ref={toastRef}  />
         </GlobalRefContext.Provider>
     );
 };
