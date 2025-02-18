@@ -15,7 +15,7 @@ const GBackButton: FC<BackButtonProps> = ({ className, url }) => {
         } else {
             navigate(-1);
         }
-    }, []);
+    }, [navigate, url]);
     return <i onClick={onClick} className={clsx('pi pi-arrow-left', className)}></i>;
 };
 export default GBackButton;

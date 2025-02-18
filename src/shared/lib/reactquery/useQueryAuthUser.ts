@@ -2,9 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { queryKeys } from './index.ts';
 import { supabase } from '../../../app';
 import { authApi } from '../../../features/auth';
-import User, { LoginType } from '../../../entities/user';
+import UserDto, { LoginType } from '../../../entities/user';
 
-async function fetchUserRegistered(): Promise<boolean | User> {
+async function fetchUserRegistered(): Promise<boolean | UserDto> {
     const { data, error } = await supabase.auth.getUser();
     if (error) {
         // 토큰 만료

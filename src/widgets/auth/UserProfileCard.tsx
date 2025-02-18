@@ -1,8 +1,8 @@
-import User from '../../entities/user';
+import UserDto from '../../entities/user';
 import { FC } from 'react';
 
 type Props = {
-    data: User;
+    data: UserDto;
 };
 // 예시 코드 : 공통 컴포넌트 shared/ui 보다는 확장된 컴포넌트
 const UserProfileCard: FC<Props> = ({ data }) => {

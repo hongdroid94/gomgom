@@ -64,7 +64,7 @@ const ProfileSettingForm: FC<Props> = ({ user }) => {
             console.error(e);
             console.info(e);
         }
-    }, [name, file]);
+    }, [name, user, file, navigate, toastRef]);
 
     return (
         <div>

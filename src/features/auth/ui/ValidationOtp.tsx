@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { InputOtp } from 'primereact/inputotp';
+import { InputOtp, InputOtpChangeEvent } from 'primereact/inputotp';
 import { authApi } from '../api';
 import { useAuthStore } from '../../../entities/user/model';
 import { useNavigate } from 'react-router';
@@ -21,7 +21,7 @@ const ValidationOtp = () => {
         if (otp.length === 6) {
             verifyOtp().then();
         }
-    }, [otp]);
+    }, [otp.length, verifyOtp]);
 
     const startTimer = () => {
         setTimer(60);
@@ -43,8 +43,8 @@ const ValidationOtp = () => {
         startTimer(); // 처음 컴포넌트가 렌더링될 때 타이머 시작
     }, []);
 
-    const onChangeOtp = (e) => {
-        setOtp(e.value);
+    const onChangeOtp = (e:InputOtpChangeEvent) => {
+        setOtp(e.value as string);
     };
 
     const verifyOtp = useCallback(async () => {
@@ -59,11 +59,11 @@ const ValidationOtp = () => {
             } else {
                 navigate('/register/profile');
             }
-        } catch (e) {
+        } catch (e:Error) {
             toastError(toastRef, e.toString());
             setOtp('');
         }
-    }, [otp, emailLogin]);
+    }, [navigate, toastRef,otp, emailLogin]);
 
     const onResendOtp = async () => {
         try {

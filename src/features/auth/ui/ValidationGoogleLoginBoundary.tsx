@@ -8,9 +8,9 @@ import { Navigate } from 'react-router-dom';
 type Props = {
     children: React.ReactNode;
 }
-const ValidationGoogleLoginBoundary:FC<Props> = ({children}) => {
-    const { isLoading, data,isError,error } = useValidateGmail();
-    const {toastRef} = useToast();
+const ValidationGoogleLoginBoundary: FC<Props> = ({ children }) => {
+    const { isLoading, isError, error } = useValidateGmail();
+    const { toastRef } = useToast();
     if (isLoading) {
         return (
             <div className={'w-full h-full flex justify-center items-center'}>
@@ -18,9 +18,9 @@ const ValidationGoogleLoginBoundary:FC<Props> = ({children}) => {
             </div>
         );
     }
-    if(isError){
-        toastError(toastRef,error?.toString()??"");
-        return <Navigate to={"/register"}/>
+    if (isError) {
+        toastError(toastRef, error?.toString() ?? '');
+        return <Navigate to={'/register'} />;
     }
     return (
         <>

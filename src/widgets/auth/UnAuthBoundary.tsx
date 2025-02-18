@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
-import { useQueryAuthUser } from '../../shared/lib/reactquery/useQueryAuthUser.ts';
-import { useToast } from '../../shared/hook/useToast.ts';
+import { useQueryAuthUser } from '../../shared/lib/reactquery';
 import { GLoading } from '../../shared/ui';
-import { AuthApiError, AuthSessionMissingError } from '@supabase/supabase-js';
 import { Navigate } from 'react-router-dom';
 
 type Props = {
