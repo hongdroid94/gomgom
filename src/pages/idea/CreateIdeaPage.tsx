@@ -19,6 +19,10 @@ const CreateIdeaPage = () => {
         }
     }, [ideaSubject]);
 
+    const handleGoBack = () => {
+        navigate(-1);
+    };
+
     const handleExploreTrend = () => {
         navigate('/explore');
     };
@@ -27,37 +31,48 @@ const CreateIdeaPage = () => {
         <MainLayout>
             <AuthBoundary>
                 <div className="max-w-4xl mx-auto py-8">
-                    <h1 className="text-2xl font-bold mb-8">아이디어 상자 만들기</h1>
+                    <div className="space-y-4 mb-8">
+                        <button 
+                            onClick={handleGoBack}
+                            className="p-1 hover:bg-gray-100 rounded-full transition-colors w-fit"
+                        >
+                            <img src="/icons/arrow_back.svg" alt="뒤로가기" className="w-6 h-6" />
+                        </button>
+                        <h1 className="text-2xl font-bold">아이디어 상자 만들기</h1>
+                    </div>
                     
                     <div className="space-y-8">
-                        {/* 국가 선택 */}
-                        <div className="space-y-2">
-                            <label className="block text-lg font-medium">국가</label>
-                            <select className="w-full p-3 border border-gray-200 rounded-lg">
-                                <option value="">국가를 선택해주세요</option>
-                                <option value="korea">대한민국</option>
-                            </select>
-                        </div>
+                        {/* 드롭다운 그룹을 flex로 변경 */}
+                        <div className="flex gap-4">
+                            {/* 국가 선택 */}
+                            <div className="flex-1 space-y-2">
+                                <label className="block text-lg font-medium">국가</label>
+                                <select className="w-full p-3 border border-gray-200 rounded-lg">
+                                    <option value="">국가를 선택해주세요</option>
+                                    <option value="korea">대한민국</option>
+                                </select>
+                            </div>
 
-                        {/* 규모 선택 */}
-                        <div className="space-y-2">
-                            <label className="block text-lg font-medium">규모</label>
-                            <select className="w-full p-3 border border-gray-200 rounded-lg">
-                                <option value="">규모를 선택해주세요</option>
-                                <option value="small">1인 사업자</option>
-                                <option value="medium">30인 사업자</option>
-                                <option value="large">대기업</option>
-                            </select>
-                        </div>
+                            {/* 규모 선택 */}
+                            <div className="flex-1 space-y-2">
+                                <label className="block text-lg font-medium">규모</label>
+                                <select className="w-full p-3 border border-gray-200 rounded-lg">
+                                    <option value="">규모를 선택해주세요</option>
+                                    <option value="small">1인 사업자</option>
+                                    <option value="medium">30인 사업자</option>
+                                    <option value="large">대기업</option>
+                                </select>
+                            </div>
 
-                        {/* 목적 선택 */}
-                        <div className="space-y-2">
-                            <label className="block text-lg font-medium">목적</label>
-                            <select className="w-full p-3 border border-gray-200 rounded-lg">
-                                <option value="">목적을 선택해주세요</option>
-                                <option value="profit">수익성</option>
-                                <option value="social">사회적 가치</option>
-                            </select>
+                            {/* 목적 선택 */}
+                            <div className="flex-1 space-y-2">
+                                <label className="block text-lg font-medium">목적</label>
+                                <select className="w-full p-3 border border-gray-200 rounded-lg">
+                                    <option value="">목적을 선택해주세요</option>
+                                    <option value="profit">수익성</option>
+                                    <option value="social">사회적 가치</option>
+                                </select>
+                            </div>
                         </div>
 
                         {/* 아이디어 주제 입력 */}
@@ -88,19 +103,12 @@ const CreateIdeaPage = () => {
                         </div>
 
                         {/* 버튼 영역 */}
-                        <div className="flex gap-4 pt-4">
+                        <div className="pt-4">
                             <GButton
                                 variant="primary"
-                                className="flex-1 py-4 font-medium rounded-lg"
+                                className="w-full py-4 font-medium rounded-lg"
                             >
                                 아이디어 만들기
-                            </GButton>
-                            <GButton
-                                variant="outline"
-                                className="flex-1 py-4 font-medium rounded-lg"
-                                onClick={handleExploreTrend}
-                            >
-                                트렌드 탐색하기
                             </GButton>
                         </div>
                     </div>
