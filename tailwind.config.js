@@ -8,14 +8,9 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: 'var(--primary)',
-                secondary: 'var(--secondary)',
-                cogreen: 'var(--cogreen)',
-                copink: 'var(--copink)',
-                coyellow: 'var(--coyellow)',
-                cowhite: 'var(--cowhite)',
-                coblue: 'var(--coblue)',
-                third: 'var(--third)',
+                brandmain: 'var(--brandmain)',
+                brandsub1: 'var(--brandsub1)',
+                brandsub2: 'var(--brandsub2)',
             },
         },
     },
