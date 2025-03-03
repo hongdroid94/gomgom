@@ -2,6 +2,7 @@ import { FC, ReactNode } from 'react';
 import { PrimeReactProvider } from 'primereact/api';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { GlobalToastProvider } from './GlobalToastProvider.tsx';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 type Props = {
     children: ReactNode;
@@ -13,6 +14,7 @@ const AppProvider: FC<Props> = ({ children }) => {
         <GlobalToastProvider>
             <QueryClientProvider client={queryClient}>
                 <PrimeReactProvider>{children}</PrimeReactProvider>
+                <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
         </GlobalToastProvider>
     );
