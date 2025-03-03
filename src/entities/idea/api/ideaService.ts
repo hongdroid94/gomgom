@@ -1,4 +1,4 @@
-import { IdeaFormData, GeneratedIdea } from '../model/types';
+import {IdeaFormData, GeneratedIdea} from '../model/types';
 
 const PERPLEXITY_API_TOKEN = import.meta.env.VITE_PERPLEXITY_API_TOKEN;
 
@@ -136,65 +136,3 @@ export const generateIdea = async (formData: IdeaFormData): Promise<GeneratedIde
         throw error;
     }
 };
-
-// 기존 파싱 함수는 백업으로 유지
-const parseGeneratedIdea = (content: string): GeneratedIdea => {
-    try {
-        // 응답 텍스트를 줄 단위로 분리
-        const lines = content.split('\n').map(line => line.trim()).filter(line => line);
-        
-        // 각 섹션의 내용 추출
-        const subject = lines.find(line => line.startsWith('1. 아이디어 주제:'))?.replace('1. 아이디어 주제:', '').trim() || '';
-        const introduction = lines.find(line => line.startsWith('2. 아이디어 소개'))?.replace('2. 아이디어 소개 (48자 이내):', '').trim() || '';
-        const marketTrend = lines.find(line => line.startsWith('3. 시장 동향'))?.replace('3. 시장 동향 (50자 이내):', '').trim() || '';
-        const mainTarget = lines.find(line => line.startsWith('4. 주요 타깃'))?.replace('4. 주요 타깃 (50자 이내):', '').trim() || '';
-
-        // 사업 모델 섹션 파싱
-        const b2bLine = lines.find(line => line.includes('B2B:'))?.split('B2B:')[1]?.trim() || '';
-        const b2cLine = lines.find(line => line.includes('B2C:'))?.split('B2C:')[1]?.trim() || '';
-        const additionalServiceLine = lines.find(line => line.includes('추가 서비스:'))?.split('추가 서비스:')[1]?.trim() || '';
-
-        // 투자 비용 섹션 파싱
-        const initialInvestment = lines.find(line => line.includes('초기 투자금:'))?.split('초기 투자금:')[1]?.trim() || '';
-        const expectedProfit = lines.find(line => line.includes('수익 예상:'))?.split('수익 예상:')[1]?.trim() || '';
-
-        // 도움이 될 만한 자료 파싱
-        const resourcesStartIndex = lines.findIndex(line => line.includes('도움이 될만한 자료와 사이트:'));
-        const helpfulResourcesStrings = resourcesStartIndex !== -1 
-            ? lines.slice(resourcesStartIndex + 1).filter(line => line.startsWith('-')).map(line => line.replace('-', '').trim())
-            : [];
-            
-        // 타입에 맞게 변환
-        const helpfulResources: ResourceItem[] = helpfulResourcesStrings.map(str => ({
-            title: str,
-            description: '',
-            url: ''
-        }));
-        
-        // 초기 투자금 타입에 맞게 변환
-        const initial: InitialInvestment = {
-            total: initialInvestment,
-            breakdown: []
-        };
-
-        return {
-            subject,
-            introduction,
-            marketTrend,
-            mainTarget,
-            businessModel: {
-                b2b: [b2bLine],
-                b2c: [b2cLine],
-                additionalService: [additionalServiceLine]
-            },
-            investment: {
-                initial,
-                expected: expectedProfit
-            },
-            helpfulResources
-        };
-    } catch (error) {
-        console.error('Failed to parse generated idea:', error);
-        throw error;
-    }
-}; 
