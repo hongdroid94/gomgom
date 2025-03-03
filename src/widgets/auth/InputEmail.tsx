@@ -4,15 +4,16 @@ import React, { forwardRef } from 'react';
 type InputEmailProps = {
     value: string | undefined;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    labelClassName?:string,
     onClear: () => void;
 };
 
 // forwardRef 사용
 const InputEmail = forwardRef<HTMLInputElement, InputEmailProps>(
-    ({ value, onChange, onClear }, ref) => {
+    ({ value, onChange, onClear,labelClassName }, ref) => {
         return (
             <div className="w-full">
-                <label htmlFor="email-login">이메일</label>
+                <label htmlFor="email-login" className={labelClassName}>이메일</label>
                 <div className="relative">
                     <InputText
                         ref={ref} // ✅ ref를 전달할 수 있도록 수정
