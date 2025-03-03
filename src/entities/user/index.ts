@@ -13,7 +13,7 @@ export default interface UserDto {
     createdAt: Date;
     deletedAt?: Date | null;
 }
-export type User = {
+export type UserEntity = {
     id: string;
     nickname: string;
     email: string;

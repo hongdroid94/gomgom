@@ -14,14 +14,11 @@
 
 /*색상코드 정의 tailwind.config.js 에서도 정의 해야 동작함*/
 :root {
-    --third: #d9d9d9;
-    --cohint: #ffc54e;
-    --cotext: #f8f8f2;
-    --primary: #282a36;
-    --secondary: #44475a;
-    --cogreen: #00ff44;
-    --coblue: #8be9fd;
-    --copink: #ff79c6;
-    --coyellow: #f1fa8c;
-    --cowhite: #f8f8f2;
+    --brandmain: #A3C700;
+    --brandsub1: #F97E20;
+    --brandsub2:#FAF7EE;
+    --fail:#DC0000;
+    --success:#04B014
+
+
 }

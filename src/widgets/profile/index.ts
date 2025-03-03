@@ -1,0 +1,1 @@
+export { default as UserProfilePopUp } from './UserProfilePopUp.tsx';
