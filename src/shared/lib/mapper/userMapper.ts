@@ -1,6 +1,6 @@
 import { User } from '@supabase/supabase-js';
 import { RequestUserDto } from '../../../features/auth/model';
-import { LoginType } from '../../../entities/user';
+import UserDto, { LoginType, UserEntity } from '../../../entities/user';
 
 export const mapperUserToRequestUserDto = (data: User): RequestUserDto => {
     console.log(data);
@@ -16,3 +16,15 @@ export const mapperUserToRequestUserDto = (data: User): RequestUserDto => {
         uid: data.id,
     };
 };
+
+export const mapperUserEntityToUserDto= (data:UserEntity):UserDto=>{
+    return {
+        profileImageUrl:data.profile_image_url,
+        createdAt:data.created_at,
+        deletedAt:data.deleted_at,
+        email:data.email,
+        loginType:data.login_type,
+        nickname:data.nickname,
+        id:data.id
+    }
+}
