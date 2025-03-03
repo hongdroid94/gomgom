@@ -21,7 +21,7 @@ const ValidationOtp = () => {
         if (otp.length === 6) {
             verifyOtp().then();
         }
-    }, [otp.length, verifyOtp]);
+    }, [otp.length, ]);
 
     const startTimer = () => {
         setTimer(60);
