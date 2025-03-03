@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Header from './Header';
+import Header from './Header.tsx';
 
 // 앱의 기본 레이아웃을 정의하는 컴포넌트
 const MainLayout = ({ children }: { children: ReactNode }) => {
