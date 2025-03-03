@@ -6,19 +6,36 @@ export interface IdeaFormData {
     description: string;
 }
 
+export interface InvestmentBreakdownItem {
+    item: string;
+    amount: string;
+    description: string;
+}
+
+export interface InitialInvestment {
+    total: string;
+    breakdown: InvestmentBreakdownItem[];
+}
+
+export interface ResourceItem {
+    title: string;
+    description: string;
+    url: string;
+}
+
 export interface GeneratedIdea {
     subject: string;
     introduction: string;
     marketTrend: string;
     mainTarget: string;
     businessModel: {
-        b2b: string;
-        b2c: string;
-        additionalService: string;
+        b2b: string[];
+        b2c: string[];
+        additionalService: string[];
     };
     investment: {
-        initial: string;
+        initial: InitialInvestment;
         expected: string;
     };
-    helpfulResources: string[];
+    helpfulResources: ResourceItem[];
 } 

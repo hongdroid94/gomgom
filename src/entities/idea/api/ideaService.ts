@@ -11,27 +11,50 @@ export const generateIdea = async (formData: IdeaFormData): Promise<GeneratedIde
         - 아이디어 주제: ${formData.subject}
         - 아이디어 설명: ${formData.description}
 
+        아이디어는 실현 가능하고 구체적이며 혁신적이어야 합니다. 시장 조사와 트렌드를 반영하여 현실적인 비즈니스 모델을 제시해주세요.
+        
         반드시 다음 JSON 형식으로만 응답해주세요. 다른 텍스트는 포함하지 마세요:
         {
-            "subject": "아이디어 주제",
-            "introduction": "아이디어 소개 (48자 이내)",
-            "marketTrend": "시장 동향 (50자 이내)",
-            "mainTarget": "주요 타깃 (50자 이내)",
+            "subject": "아이디어 주제 (명확하고 간결하게)",
+            "introduction": "아이디어 소개 (48자 이내, 핵심 가치와 차별점 포함)",
+            "marketTrend": "시장 동향 (50자 이내, 최신 트렌드와 시장 규모 언급)",
+            "mainTarget": "주요 타깃 (50자 이내, 구체적인 페르소나와 니즈 설명)",
             "businessModel": {
-                "b2b": "B2B 모델 설명",
-                "b2c": "B2C 모델 설명",
-                "additionalService": "추가 서비스 설명"
+                "b2b": [
+                    "B2B 모델 항목 1 (구체적인 수익 모델과 가치 제안)",
+                    "B2B 모델 항목 2 (파트너십 전략이나 확장 가능성)"
+                ],
+                "b2c": [
+                    "B2C 모델 항목 1 (소비자 가치 제안과 수익화 방안)",
+                    "B2C 모델 항목 2 (사용자 경험과 마케팅 전략)"
+                ],
+                "additionalService": [
+                    "추가 서비스 항목 1 (주 서비스와의 시너지 효과)",
+                    "추가 서비스 항목 2 (미래 확장 가능성)"
+                ]
             },
             "investment": {
-                "initial": "초기 투자금",
-                "expected": "수익 예상"
+                "initial": {
+                    "total": "총 초기 투자금 (구체적인 금액)",
+                    "breakdown": [
+                        {"item": "개발 비용", "amount": "금액", "description": "필요한 이유"},
+                        {"item": "마케팅 비용", "amount": "금액", "description": "필요한 이유"},
+                        {"item": "인력 비용", "amount": "금액", "description": "필요한 이유"},
+                        {"item": "기타 비용", "amount": "금액", "description": "필요한 이유"}
+                    ]
+                },
+                "expected": "수익 예상 (ROI와 손익분기점 시점 포함)"
             },
             "helpfulResources": [
-                "도움이 될만한 자료1",
-                "도움이 될만한 자료2",
-                "도움이 될만한 자료3"
+                {"title": "자료 제목 1", "description": "자료 설명", "url": "https://example.com/resource1"},
+                {"title": "자료 제목 2", "description": "자료 설명", "url": "https://example.com/resource2"},
+                {"title": "자료 제목 3", "description": "자료 설명", "url": "https://example.com/resource3"},
+                {"title": "자료 제목 4", "description": "자료 설명", "url": "https://example.com/resource4"}
             ]
         }
+        
+        각 항목은 구체적이고 실행 가능한 내용으로 작성해주세요. 특히 사업 모델과 투자 비용은 현실적인 수치와 전략을 포함해야 합니다.
+        도움이 될만한 자료는 실제 존재하는 웹사이트 링크를 포함하고, 각 자료가 어떻게 도움이 될지 간략히 설명해주세요.
     `;
 
     try {
@@ -48,15 +71,15 @@ export const generateIdea = async (formData: IdeaFormData): Promise<GeneratedIde
                 messages: [
                     {
                         role: "system",
-                        content: "You are a helpful assistant that responds only with JSON. Do not include any explanations, only provide a RFC8259 compliant JSON response."
+                        content: "You are a helpful assistant that responds only with JSON. You are an expert in business development, startup ideas, and market analysis. Provide detailed, realistic, and innovative business ideas with concrete details."
                     },
                     {
                         role: "user",
                         content: prompt
                     }
                 ],
-                max_tokens: 1000,
-                temperature: 0.2,
+                max_tokens: 2000,
+                temperature: 0.3,
             }),
         });
 
@@ -79,31 +102,34 @@ export const generateIdea = async (formData: IdeaFormData): Promise<GeneratedIde
             const parsedJson = JSON.parse(jsonString);
             console.log('파싱된 JSON:', parsedJson);
             
-            // GeneratedIdea 형식에 맞게 변환
-            const generatedIdea: GeneratedIdea = {
+            // GeneratedIdea 타입도 업데이트해야 함
+            return {
                 subject: parsedJson.subject || '',
                 introduction: parsedJson.introduction || '',
                 marketTrend: parsedJson.marketTrend || '',
                 mainTarget: parsedJson.mainTarget || '',
                 businessModel: {
-                    b2b: parsedJson.businessModel?.b2b || '',
-                    b2c: parsedJson.businessModel?.b2c || '',
-                    additionalService: parsedJson.businessModel?.additionalService || ''
+                    b2b: Array.isArray(parsedJson.businessModel?.b2b) 
+                        ? parsedJson.businessModel.b2b 
+                        : [],
+                    b2c: Array.isArray(parsedJson.businessModel?.b2c) 
+                        ? parsedJson.businessModel.b2c 
+                        : [],
+                    additionalService: Array.isArray(parsedJson.businessModel?.additionalService) 
+                        ? parsedJson.businessModel.additionalService 
+                        : []
                 },
                 investment: {
-                    initial: parsedJson.investment?.initial || '',
+                    initial: parsedJson.investment?.initial || {},
                     expected: parsedJson.investment?.expected || ''
                 },
                 helpfulResources: Array.isArray(parsedJson.helpfulResources) 
                     ? parsedJson.helpfulResources 
                     : []
             };
-            
-            return generatedIdea;
         } catch (parseError) {
             console.error('JSON 파싱 실패:', parseError);
-            // 파싱 실패 시 기존 방식으로 시도
-            return parseGeneratedIdea(content);
+            throw new Error('응답 데이터 파싱에 실패했습니다.');
         }
     } catch (error) {
         console.error('Failed to generate idea:', error);
@@ -134,9 +160,22 @@ const parseGeneratedIdea = (content: string): GeneratedIdea => {
 
         // 도움이 될 만한 자료 파싱
         const resourcesStartIndex = lines.findIndex(line => line.includes('도움이 될만한 자료와 사이트:'));
-        const helpfulResources = resourcesStartIndex !== -1 
+        const helpfulResourcesStrings = resourcesStartIndex !== -1 
             ? lines.slice(resourcesStartIndex + 1).filter(line => line.startsWith('-')).map(line => line.replace('-', '').trim())
             : [];
+            
+        // 타입에 맞게 변환
+        const helpfulResources: ResourceItem[] = helpfulResourcesStrings.map(str => ({
+            title: str,
+            description: '',
+            url: ''
+        }));
+        
+        // 초기 투자금 타입에 맞게 변환
+        const initial: InitialInvestment = {
+            total: initialInvestment,
+            breakdown: []
+        };
 
         return {
             subject,
@@ -144,12 +183,12 @@ const parseGeneratedIdea = (content: string): GeneratedIdea => {
             marketTrend,
             mainTarget,
             businessModel: {
-                b2b: b2bLine,
-                b2c: b2cLine,
-                additionalService: additionalServiceLine
+                b2b: [b2bLine],
+                b2c: [b2cLine],
+                additionalService: [additionalServiceLine]
             },
             investment: {
-                initial: initialInvestment,
+                initial,
                 expected: expectedProfit
             },
             helpfulResources
