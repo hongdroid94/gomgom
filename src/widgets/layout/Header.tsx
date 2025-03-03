@@ -1,6 +1,13 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useCallback, useState } from 'react';
+import { UserProfilePopUp } from '../profile';
 
 const Header = () => {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const closePopUp = useCallback(() => {
+        setIsDropdownOpen(false);
+    }, []);
+
     return (
         <header className="w-full border-b border-gray-200">
             <div className="max-w-7xl mx-auto px-4">
@@ -29,10 +36,19 @@ const Header = () => {
                     </div>
 
                     <div className="flex items-center space-x-4">
-                        <button className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-                            <img src="/icons/prime_user.svg" alt="user" className="w-5 h-5" />
-                        </button>
-                        
+                        <div className="relative">
+                            <button
+                                className="w-5 h-5 flex items-center justify-center"
+                                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                            >
+                                <img src="/icons/prime_user.svg" alt="user" className="w-full h-full" />
+                            </button>
+
+                            {isDropdownOpen && (
+                                <UserProfilePopUp closePopup={closePopUp} />
+                            )}
+                        </div>
+
                         <div className="flex items-center gap-2">
                             <img src="/icons/tape_icon.svg" alt="tape" className="w-5 h-5" />
                             <span className="text-sm font-medium">128개</span>
