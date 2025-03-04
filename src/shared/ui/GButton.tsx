@@ -16,6 +16,9 @@ type ButtonProps = {
 
 // 공통 위젯
 // TODO : 디자인 확정 나면 컴포넌트 스타일 적용
+/**
+ *@deprecated : children 을 toString() 해서 label 에 붙히면 확장성이 떨어짐
+ */
 const GButton: FC<ButtonProps> = ({
                                       icon,
                                       iconPos,
@@ -36,7 +39,6 @@ const GButton: FC<ButtonProps> = ({
     return (
         <Button
             loading={loading}
-            style={{ borderRadius: 0 }}
             label={children?.toString()}
             className={buttonClass}
             onClick={onClick}
