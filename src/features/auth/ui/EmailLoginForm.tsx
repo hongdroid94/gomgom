@@ -9,6 +9,8 @@ import { useToast } from '../../../shared/hook/useToast.ts';
 import { emailRegex } from '../../../shared/lib';
 import { LoginType } from '../../../entities/user';
 import { toastError } from '../../../shared/lib/toastUtils.ts';
+import { Divider } from 'primereact/divider';
+import { GButton2 } from '../../../shared/ui';
 
 const EmailLoginForm = () => {
     const [email, onChangeEmail, setEmail] = useInput({ initialValue: '' });
@@ -63,20 +65,30 @@ const EmailLoginForm = () => {
             <InputEmail
                 ref={inputRef}
                 value={email}
+                placeholder={'gomgom@gmail.com'}
                 onChange={onChangeEmail}
                 onClear={() => setEmail('')}
             />
             <GButton
                 loading={isLoadingOtp}
-                onClick={onClickEmailLogin} className={'bg-white text-black px-4 mt-2'}>
+                onClick={onClickEmailLogin}
+                className={'bg-brandsub1  text-white px-4 mt-2'}>
                 이메일로 계속하기
             </GButton>
-            <GButton
+            <div className={'flex items-center'}>
+                <Divider align={'center'} className={''} />
+                <div className={'min-w-max text-gray-4  00 mx-2 '}>또는</div>
+                <Divider align={'center'} className={''} />
+            </div>
+            <GButton2
                 onClick={onClickGoogleLogin}
-                className={'bg-black text-center rounded-none px-4 mt-2'}
+                className={'bg-white text-black text-center border-gray-500 border-1 px-4 mt-2'}
             >
-                구글 로그인
-            </GButton>
+                <div className={'text-center w-full flex items-center justify-center'}>
+                    <i className={'pi pi-custom-google mr-2'} style={{fontSize:"1.5rem"}}></i>
+                    구글 계정으로 로그인
+                </div>
+            </GButton2>
         </div>
     );
 };

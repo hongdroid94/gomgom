@@ -4,9 +4,10 @@ import { authApi } from '../api';
 import { useAuthStore } from '../../../entities/user/model';
 import { useNavigate } from 'react-router';
 import { Fieldset } from 'primereact/fieldset';
-import { GBackButton } from '../../../shared/ui';
+import { GBackButton, GButton2 } from '../../../shared/ui';
 import { useToast } from '../../../shared/hook/useToast.ts';
 import { toastError } from '../../../shared/lib/toastUtils.ts';
+import { Chip } from 'primereact/chip';
 
 const ValidationOtp = () => {
     const { emailLogin } = useAuthStore();
@@ -17,11 +18,8 @@ const ValidationOtp = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // OTP 6자리 입력 시 자동 인증
-        if (otp.length === 6) {
-            verifyOtp().then();
-        }
-    }, [otp.length, ]);
+        startTimer(); // 처음 컴포넌트가 렌더링될 때 타이머 시작
+    }, []);
 
     const startTimer = () => {
         setTimer(60);
@@ -39,11 +37,7 @@ const ValidationOtp = () => {
         }, 1000);
     };
 
-    useEffect(() => {
-        startTimer(); // 처음 컴포넌트가 렌더링될 때 타이머 시작
-    }, []);
-
-    const onChangeOtp = (e:InputOtpChangeEvent) => {
+    const onChangeOtp = (e: InputOtpChangeEvent) => {
         setOtp(e.value as string);
     };
 
@@ -59,11 +53,11 @@ const ValidationOtp = () => {
             } else {
                 navigate('/register/profile');
             }
-        } catch (e:Error) {
+        } catch (e: Error) {
             toastError(toastRef, e.toString());
             setOtp('');
         }
-    }, [navigate, toastRef,otp, emailLogin]);
+    }, [navigate, toastRef, otp, emailLogin]);
 
     const onResendOtp = async () => {
         try {
@@ -75,21 +69,33 @@ const ValidationOtp = () => {
     };
 
     return (
-        <Fieldset className={'p-4 w-full max-w-[80%] sm:max-w-[60%] lg:max-w-[50%]'}>
-            <GBackButton />
-            <h2 className="text-lg font-semibold mb-2 mt-2">코드 입력</h2>
-            <div className={'my-2'}>{emailLogin}로 보낸 6자리 코드를 입력하세요</div>
+        <div className={'flex flex-col items-center '}>
+            <div className={'flex items-center w-full'}>
+                <GBackButton />
+                <h2 className="flex-1 text-center text-4xl font-semibold mb-2 mt-2">코드 입력</h2>
+            </div>
+            <div className={'mt-4 text-gray-500'}>메일에서 코드 확인후 입력해주세요</div>
+            <Chip className={'mt-3 mb-8 bg-transparent border-gray-300 border-2 rounded-full'} label={emailLogin}></Chip>
             <InputOtp integerOnly style={{ gap: 20 }} length={6} value={otp} onChange={onChangeOtp} />
-            <div className="flex justify-between mt-2">
+            <div className="flex justify-between my-2">
                 {canResend ? (
-                    <button onClick={onResendOtp} className="text-blue-500">
-                        재전송하기
+                    <button onClick={onResendOtp} className="text-black underline">
+                        코드 재전송
                     </button>
                 ) : (
-                    <span className="text-gray-500">{timer}초 후 재전송</span>
+                    <span className="text-gray-500 underline">{timer}초 후 재전송이 가능해요</span>
                 )}
             </div>
-        </Fieldset>
+            {/* 기존: OTP 6자리 입력 시 자동 인증 */}
+            {/* useEffect(() => {
+                if (otp.length === 6) {
+                    verifyOtp().then();
+                }
+            }, [otp.length]); */}
+
+            {/* 변경: 입력하기 버튼을 눌러야 전송 */}
+            <GButton2 label={"입력하기"} className={'w-full bg-brandsub1 border-brandsub1'} onClick={verifyOtp} />
+        </div>
     );
 };
 

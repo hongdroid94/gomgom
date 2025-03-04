@@ -4,13 +4,14 @@ import React, { forwardRef } from 'react';
 type InputEmailProps = {
     value: string | undefined;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    labelClassName?:string,
+    labelClassName?: string,
     onClear: () => void;
+    placeholder?: string;
 };
 
 // forwardRef 사용
 const InputEmail = forwardRef<HTMLInputElement, InputEmailProps>(
-    ({ value, onChange, onClear,labelClassName }, ref) => {
+    ({ value, onChange, onClear, labelClassName, placeholder }, ref) => {
         return (
             <div className="w-full">
                 <label htmlFor="email-login" className={labelClassName}>이메일</label>
@@ -20,10 +21,10 @@ const InputEmail = forwardRef<HTMLInputElement, InputEmailProps>(
                         id="email-login"
                         type="email"
                         aria-label="Email"
-                        placeholder="이메일 주소 입력"
+                        placeholder={placeholder ?? '이메일 주소 입력'}
                         value={value}
                         onChange={onChange}
-                        className="rounded-none mt-1 pr-10 w-full"
+                        className="mt-1 pr-10 w-full"
                     />
                     {value && (
                         <i
@@ -34,7 +35,7 @@ const InputEmail = forwardRef<HTMLInputElement, InputEmailProps>(
                 </div>
             </div>
         );
-    }
+    },
 );
 
 export default InputEmail;
