@@ -11,6 +11,9 @@ export default {
                 brandmain: 'var(--brandmain)',
                 brandsub1: 'var(--brandsub1)',
                 brandsub2: 'var(--brandsub2)',
+                success: 'var(--success)',
+                fail: 'var(--fail)',
+
             },
         },
     },
