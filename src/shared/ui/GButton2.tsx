@@ -6,6 +6,7 @@ import clsx from 'clsx';
 type ButtonProps = {
     className?: string;
     children?: React.ReactNode;
+    label?: string;
     onClick?: () => void;
     loading?: boolean;
     icon?: string,
@@ -16,19 +17,17 @@ type ButtonProps = {
 
 // 공통 위젯
 // TODO : 디자인 확정 나면 컴포넌트 스타일 적용
-/**
- *@deprecated : children 을 toString() 해서 label 에 붙히면 확장성이 떨어짐
- */
-const GButton: FC<ButtonProps> = ({
-                                      icon,
-                                      iconPos,
-                                      className,
-                                      children,
-                                      onClick,
-                                      variant = null,
-                                      disabled = false,
-                                      loading,
-                                  }) => {
+const GButton2: FC<ButtonProps> = ({
+                                       icon,
+                                       iconPos,
+                                       className,
+                                       children,
+                                       onClick,
+                                       variant = null,
+                                       disabled = false,
+                                       label,
+                                       loading,
+                                   }) => {
     const buttonClass = clsx(
         className,
         variant === 'primary' && 'bg-black text-white hover:bg-gray-900',
@@ -39,14 +38,14 @@ const GButton: FC<ButtonProps> = ({
     return (
         <Button
             loading={loading}
-            label={children?.toString()}
+            label={label}
             className={buttonClass}
             onClick={onClick}
             disabled={disabled}
             icon={icon}
             iconPos={iconPos}
-        ></Button>
+        >{children}</Button>
     );
 };
 
-export default GButton;
+export default GButton2;

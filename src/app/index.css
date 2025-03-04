@@ -16,9 +16,16 @@
 :root {
     --brandmain: #A3C700;
     --brandsub1: #F97E20;
-    --brandsub2:#FAF7EE;
-    --fail:#DC0000;
-    --success:#04B014
-
-
+    --brandsub2: #FAF7EE;
+    --fail: #DC0000;
+    --success: #04B014
 }
+
+.pi.pi-custom-google {
+    background: url('/icons/google_logo.svg') no-repeat center center;
+    background-size: contain;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+}
+
