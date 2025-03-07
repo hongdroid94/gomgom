@@ -4,4 +4,5 @@ export * from './useQueryAuthUser.ts';
 export const queryKeys = {
     getUser: ['getUser'],
     getAuthUser: ['getAuthUser'],
+    getIdeaForUser: ['idea', 'my'],
 };
